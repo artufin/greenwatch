@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import CustomMap from "../components/CustomMap";
-import CustomMarker from "../components/Marker";
+import CustomMarker from "../components/RedMarker";
 import InfoWindowContent from "../components/TreeInfo";
 
 const pins = [
   { 
     id: 1, 
-    x: 200,  // pixel coordinates instead of lat/lng
+    x: 200,
     y: 150,
     info: "This is the first pin." 
   },
-  // Add more pins as needed
+
 ];
 
 function MapPage() {
