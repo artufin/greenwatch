@@ -1,44 +1,53 @@
 import React, { useState } from "react";
-import CustomMap from "../components/CustomMap";
-import CustomMarker from "../components/Marker";
-import InfoWindowContent from "../components/TreeInfo";
+import { GoogleMap, useJsApiLoader, Marker, InfoWindow  } from "@react-google-maps/api";
+
+const containerStyle = {
+  width: "100%",
+  height: "100vh",
+};
+
+const center = {
+  lat: -33.42961549886816,
+  lng: -70.61107393685293,
+};
 
 const pins = [
-  { 
-    id: 1, 
-    x: 200,  // pixel coordinates instead of lat/lng
-    y: 150,
-    info: "This is the first pin." 
-  },
-  // Add more pins as needed
+    {id: 1, lat: -33.42961549886816, lng: -70.61107393685293}
+];
+
+const mapStyle = [
+  { featureType: "all", elementType: "labels", stylers: [{ visibility: "off" }] },
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", stylers: [{ visibility: "off" }] },
 ];
 
 function MapPage() {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyA8Tp4yGfL9J1CxM6sDDDeWckUuRR9wmnw",
+  });
+
   const [selectedPin, setSelectedPin] = useState(null);
 
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <CustomMap>
-      {pins.map(pin => (
-        <CustomMarker
-          key={pin.id}
-          pin={pin}
-          onClick={setSelectedPin}
-        />
-      ))}
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={15}
+      options={{ 
+        styles: mapStyle,
+        mapTypeControl: false,
+        streetViewControl: false}}
+    >
+      {/* Render Markers */}
       
-      {selectedPin && (
-        <InfoWindowContent
-          info={selectedPin.info}
-          onClose={() => setSelectedPin(null)}
-          style={{
-            position: 'absolute',
-            left: selectedPin.x,
-            top: selectedPin.y,
-          }}
-        />
-      )}
-    </CustomMap>
+      {/* Render InfoWindow for the selected pin */}
+      
+    </GoogleMap>
   );
 }
 
-export default MapPage;
+export default React.memo(MapPage);
