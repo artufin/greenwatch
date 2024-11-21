@@ -10,7 +10,7 @@ const GreenMarker = ({ x, y, onClick}) => (
       left: x,
       top: y,
       width: '30px',
-      height: '40px',
+      height: '41px',
       transform: 'translate(-50%, -50%)',
       cursor: 'pointer',
       transition: 'transform 0.2s',
