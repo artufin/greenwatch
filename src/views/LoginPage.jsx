@@ -1,7 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add login logic here if needed
+    navigate('/map');
+  };
+
   return (
     <div className="login-container">
       <div className="login-background">
@@ -10,7 +19,7 @@ const LoginPage = () => {
       <div className="login-box">
         <h1>Iniciar Sesión</h1>
         <p>Inicia sesión para acceder al mapa.</p>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
           <input type="text" placeholder="ID/Email" className="input-field" />
           <input type="password" placeholder="Contraseña" className="input-field" />
           <button type="submit" className="login-button">Iniciar Sesión</button>
