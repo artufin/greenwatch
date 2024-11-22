@@ -251,11 +251,21 @@ const CustomMap = () => {
   ];
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+    <div style={{ 
+      position: 'relative', 
+      width: '100%', 
+      paddingBottom: '56.25%', // 16:9 aspect ratio
+      overflow: 'hidden'
+    }}>
       <img 
         src={mapImage} 
         alt="Map" 
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        style={{ 
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
+        }}
       />
       
       {trees.map(tree => (
